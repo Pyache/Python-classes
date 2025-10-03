@@ -1,0 +1,54 @@
+import pygame
+
+pygame.init()
+
+# Set up the game window
+screen_width = 800
+screen_height = 600
+screen = pygame.display.set_mode((screen_width, screen_height))
+pygame.display.set_caption("My Simple 2D Game")
+
+# Player settings
+player_x = screen_width / 2 - 25 # Center the player
+player_y = screen_height - 100
+player_speed = 0.5
+player_size = 50
+
+# Game loop
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    # Player movement
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+        player_x -= player_speed
+    if keys[pygame.K_RIGHT]:
+        player_x += player_speed
+    if keys[pygame.K_UP]:
+        player_y -= player_speed
+    if keys[pygame.K_DOWN]:
+        player_y += player_speed
+
+    # Keep player within screen bounds
+    if player_x < 0:
+        player_x = 0
+    if player_x > screen_width - player_size:
+        player_x = screen_width - player_size
+    if player_y < 0:
+        player_y = 0
+    if player_y > screen_height - player_size:
+        player_y = screen_height - player_size
+
+    # Fill the screen with a color (RGB: Blue)
+    screen.fill((0, 0, 255))
+
+    # Draw the player (Red square)
+    pygame.draw.rect(screen, (255, 0, 0), (player_x, player_y, player_size, player_size))
+
+    # Update the display
+    pygame.display.update()
+
+pygame.quit()

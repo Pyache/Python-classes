@@ -28,7 +28,6 @@ button_.pack()
 text_box.pack()
 root.mainloop()
 
-#____________________
 
 from tkinter import *
 root = Tk()
